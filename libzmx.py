@@ -747,20 +747,20 @@ def make_singlet(z) :
     """Make a singlet lens"""
     model = SurfaceSequence(z, empty=True)
 
-    # Set entrance pupil diameter
-    z.SetSystemAper(0, 1, 10.0)
+    model[0].thickness = 100     # Set object plane position
+    z.SetSystemAper(0, 1, 10.0)  # Set entrance pupil diameter to 10.0
 
-    model.append_new(Standard)
-    model.append_new(Standard)
+    # append front surface
+    front = model.append_new(Standard)
+    front.glass = "BK7"
+    front.thickness = 1.0
 
-    model[0].thickness = 100
-    # lens front face
-    model[1].glass = "BK7"
-    model[1].thickness = 1
-    # lens back face
-    model[2].curvature.set_fnumber(10)
-    model[2].thickness.focus_on_next()
+    # append back surface
+    back = model.append_new(Standard)
+    back.curvature.set_fnumber(10)   # f/number solve on radius
+    back.thickness.focus_on_next()   # marginal ray height solve
 
+    z.PushLens() # transfer model to frontend
 
 if __name__=="__main__" :
     import sys
