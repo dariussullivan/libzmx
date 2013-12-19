@@ -491,10 +491,33 @@ class BaseSurface(object) :
     __metaclass__ = surface_type
     surface_type = None
 
+    type = Property(Parameter, 0, str)
+
     def __init__(self, conn, id) :
         self.conn = conn
         self.id = id
 
+    @classmethod
+    def create(cls, conn, id, comment=None, **kwargs) :
+        # a surface type must be defined (don't call on the abstract class)
+        assert(cls.surface_type is not None)
+        # initialise surface
+        surf = cls(conn, id)
+        surf.type = surf.surface_type
+        # assign arguments to surface parameters
+        if comment is not None :
+            kwargs["comment"] = comment
+        for key, value in kwargs.items() :
+            try :
+                p = getattr(surf, key)
+            except :
+                raise KeyError(key)
+            else :
+                # use method, rather than attribute, to ensure this is Parameter instance
+                p.set_value(value)
+            
+        return surf
+        
     def get_surf_num(self) :
         return self.conn.FindLabel(self.id)
 
@@ -509,31 +532,9 @@ class BaseSurface(object) :
 RayNode = namedtuple("RayNode", ["status", "vigcode", "intersect", "exit_cosines", "normal", "intensity"])
 
 class UnknownSurface(BaseSurface) :
-    type = Property(Parameter, 0, str)
     comment = Property(CommentParameter)
     thickness = Property(ThicknessParameter) # NSC doesn't have this
     ignored = Property(Parameter, 20, bool)
-
-    def __init__(self, conn, id, comment=None, **kwargs) :
-        BaseSurface.__init__(self, conn, id)
-        if comment is not None :
-            kwargs["comment"] = comment
-        for key, value in kwargs.items() :
-            try :
-                p = getattr(self, key)
-                assert(isinstance(p, Parameter))
-            except :
-                raise KeyError(key)
-            p.value = value
-
-    @classmethod
-    def create(cls, *args, **kwargs) :
-        # a surface type must be defined (don't call on the abstract class)
-        assert(cls.surface_type is not None)
-        surf = cls(*args, **kwargs)
-        # creating the surface, so set the surface type
-        surf.type = cls.surface_type
-        return surf
 
     def get_ray_intersect(self, h=(0.0, 0.0), p=(0.0, 0.0), wavelength_num=0, _global = False) :
         """Get the coordinates of a ray intersecting the surface.

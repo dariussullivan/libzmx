@@ -367,6 +367,18 @@ class SetSurfaceAttributes(unittest.TestCase) :
             return item
         self.assertRaises(AttributeError, access_missing_attr_linked)        
 
+
+class SetExtraAttributes(unittest.TestCase) :    
+    def runTest(self) :    
+        z = Connection()
+        z.NewLens()
+        model = SurfaceSequence(z)
+
+        # setting the extra parameter on surface creation requires surface type to be set first, internally
+        m1 = model.insert_new(1, surface.Toroidal, num_poly_terms=11)
+    
+        self.assertEqual(m1.num_poly_terms.value, 11)
+
         
 class SetSurfaceAttributesOnInitialisation(unittest.TestCase) :    
     def runTest(self) :    
