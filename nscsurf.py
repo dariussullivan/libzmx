@@ -7,15 +7,15 @@ from libzmx import *
 class NonSequentialComponent(UnknownSurface) :
     surface_type = "NONSEQCO"
 
-    draw_ports = Property(SurfaceAuxParameter, 0)
-    offset_x = Property(SurfaceAuxParameter, 1)
-    offset_y = Property(SurfaceAuxParameter, 2)
-    offset_z = Property(SurfaceAuxParameter, 3)
-    rotate_x = Property(SurfaceAuxParameter, 4)       
-    rotate_y = Property(SurfaceAuxParameter, 5)
-    rotate_z = Property(SurfaceAuxParameter, 6)
-    rotate_before_offset = Property(SurfaceAuxParameter, 7, bool)
-    reverse_rays = Property(SurfaceAuxParameter, 8, bool)
+    draw_ports = Property(AuxParameter, 0)
+    offset_x = Property(AuxParameter, 1)
+    offset_y = Property(AuxParameter, 2)
+    offset_z = Property(AuxParameter, 3)
+    rotate_x = Property(AuxParameter, 4)       
+    rotate_y = Property(AuxParameter, 5)
+    rotate_z = Property(AuxParameter, 6)
+    rotate_before_offset = Property(AuxParameter, 7, bool)
+    reverse_rays = Property(AuxParameter, 8, bool)
 
     def __len__(self) :
         return self.conn.GetNSCData(self.get_surf_num())
