@@ -1,6 +1,7 @@
 # Author: Darius Sullivan <darius.sullivan@thermo.com> Thermo Fisher Scientific (Cambridge, UK).
 # $Rev: 346 $
 # $Date: 2013-12-17 16:52:04 +0000 (Tue, 17 Dec 2013) $
+from __future__ import print_function
 import os
 import tempfile
 import codecs
@@ -79,10 +80,10 @@ class Connection :
     def req(self, rs, timeout=0) :
         timeout = max(self.default_timeout, timeout)
         if self.verbose :
-            print "Send : " + rs
+            print("Send : " + rs)
         response = self.conversation.request(rs, timeout)
         if self.verbose :
-            print "Recv : " + response.rstrip()
+            print("Recv : " + response.rstrip())
         if response.startswith("BAD COMMAND")  :
             raise ZemaxServerError("Bad command sent to server : %s" % str(rs))
         return response.rstrip("\r\n")
@@ -767,5 +768,5 @@ class Connection :
 
 if __name__=="__main__" :   
     z = Connection()
-    print "Zemax Version : " + str(z.GetVersion())
+    print("Zemax Version : " + str(z.GetVersion()))
 

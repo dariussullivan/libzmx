@@ -3,6 +3,7 @@
 # $Rev: 151 $
 # $Date: 2013-12-17 18:29:25 +0000 (Tue, 17 Dec 2013) $
 
+from __future__ import print_function
 import random
 import re
 import numpy as np
@@ -767,7 +768,7 @@ if __name__=="__main__" :
     import sys
 
     z = Connection()
-    print "Zemax Version : " + str(z.GetVersion())
+    print("Zemax Version : " + str(z.GetVersion()))
     model = SurfaceSequence(z)
     sysconfig = SystemConfig(z)
 

@@ -1,6 +1,7 @@
 # Adapted from Active State recipe: DDE Client (David Naylor, New BSD license)
 # http://code.activestate.com/recipes/577654-dde-client/
 
+from __future__ import print_function
 from ctypes import POINTER, WINFUNCTYPE, c_char_p, c_void_p, c_int, c_ulong, c_char_p
 from ctypes.wintypes import BOOL, DWORD, BYTE, INT, LPCWSTR, UINT, ULONG
 from threading import Thread
@@ -202,7 +203,7 @@ class DDEClient(object):
 
     def callback(self, value, item=None):
         """Calback function for advice."""
-        print "%s: %s" % (item, value)
+        print("%s: %s" % (item, value))
 
     def _callback(self, wType, uFmt, hConv, hsz1, hsz2, hDdeData, dwData1, dwData2):
         # The indentation was messed up in the original source.
@@ -241,4 +242,4 @@ def WinMSGLoop():
 
 if __name__ == "__main__":
     dde = DDEClient("Zemax", "Zemax")
-    print dde.request("GetVersion")
+    print(dde.request("GetVersion"))

@@ -6,6 +6,7 @@
 # Run the tests with the command:
 # $ python tests.py
 
+from __future__ import print_function
 import zemaxclient
 from zemaxclient import Connection, SurfaceLabelError
 from libzmx import SurfaceSequence, return_to_coordinate_frame, SystemConfig, make_singlet, NamedElements
@@ -194,7 +195,7 @@ class ClientDeleteSurface(unittest.TestCase) :
 
     def ListLabels(self) :
         for i in range(self.get_len()) :
-            print (i,self.z.GetLabel(i))
+            print((i,self.z.GetLabel(i)))
 
     def testFind(self) :
         for i in range(self.n) :
@@ -358,7 +359,7 @@ class SetSurfaceAttributes(unittest.TestCase) :
 
         def access_missing_attr() :
             item =  m1.this_will_never_ever_exist
-            print "Item : " + str(item)
+            print("Item : " + str(item))
             return item
         self.assertRaises(AttributeError, access_missing_attr)
 
@@ -1079,5 +1080,5 @@ class ExportModelToCAD(unittest.TestCase) :
 
         
 if __name__=="__main__" :
-    print "Please ensure Zemax is in sequential mode before running the unit tests"
+    print("Please ensure Zemax is in sequential mode before running the unit tests")
     unittest.main()
