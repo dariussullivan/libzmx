@@ -770,7 +770,7 @@ class CoordinateReturn(unittest.TestCase) :
         insert_point = self.last
         insertion_point_sequence = count(insert_point+1)
         def factory() :
-            return self.model.insert_new(insertion_point_sequence.next(), surface.CoordinateBreak)
+            return self.model.insert_new(next(insertion_point_sequence), surface.CoordinateBreak)
 
         self.z.GetUpdate()
         return_surf = return_to_coordinate_frame(self.model, self.first, self.last, include_null_transforms=False, factory=factory)

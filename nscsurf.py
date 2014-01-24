@@ -168,13 +168,13 @@ def get_detector_data(conn, settingspath=None) :
     with conn.GetTextFileObject("Dvr", settingspath) as f:
         # extract size of array in pixels
         while True :
-            m = _dvr_pixels_re.match(f.next())
+            m = _dvr_pixels_re.match(next(f))
             if m : break
         sz = tuple(int(x) for x in m.groups())
         # allocate array of floats
         ar = np.zeros(sz, np.float32)
         # skip to column numbers
-        while not _dvr_cols_re.match(f.next()) : pass
+        while not _dvr_cols_re.match(next(f)) : pass
         # read detector data
         for i in range(sz[1]) :
             row = f.next().split('\t')

@@ -646,7 +646,7 @@ def return_to_coordinate_frame(seq, first_return_surf, last_return_surf, insert_
             insert_point = last_return_surf
             
         insertion_point_sequence = count(insert_point+1)
-        factory = lambda : seq.insert_new(insertion_point_sequence.next(), CoordinateBreak)
+        factory = lambda : seq.insert_new(next(insertion_point_sequence), CoordinateBreak)
         
     for sn1 in surfaces_to_undo :
         to_undo = seq[sn1]        
