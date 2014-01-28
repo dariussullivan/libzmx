@@ -4,7 +4,7 @@
 
 # These unit tests require the Zemax application to be running.
 # Run the tests with the command:
-# $ python tests.py
+# $ python -m libzmx.tests
 
 from __future__ import print_function
 import zemaxclient
