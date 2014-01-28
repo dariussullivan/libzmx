@@ -177,7 +177,7 @@ def get_detector_data(conn, settingspath=None) :
         while not _dvr_cols_re.match(next(f)) : pass
         # read detector data
         for i in range(sz[1]) :
-            row = f.next().split('\t')
+            row = next(f).split('\t')
             # skip row number in first column
             ar[i,:] = row[1:]
     return ar

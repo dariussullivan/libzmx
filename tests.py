@@ -23,21 +23,21 @@ from itertools import count
 class ConnectionTestCase(unittest.TestCase) :
     def runTest(self) :
         z = Connection()
-        self.assert_(z.GetVersion(), "Can't connect")
+        self.assertTrue(z.GetVersion(), "Can't connect")
 
 class CopyLensTestCase(unittest.TestCase) :
     def runTest(self) :
         z = Connection()
 
         response = z.NewLens()
-        self.failIf(response, "Can't create new lens")
+        self.assertFalse(response, "Can't create new lens")
 
         # find number of surfaces
         response = z.GetSystem()
         numsurfs1 = response[0]
 
         response = z.InsertSurface(2)
-        self.failIf(response, "Can't insert a surface")
+        self.assertFalse(response, "Can't insert a surface")
 
         # check number of surfaces increased
         response = z.GetSystem()
@@ -46,10 +46,10 @@ class CopyLensTestCase(unittest.TestCase) :
 
         # copy lens to editor
         response = z.PushLens()
-        self.failIf(response, "Can't push lens to editor window")
+        self.assertFalse(response, "Can't push lens to editor window")
 
         response = z.NewLens()
-        self.failIf(response, "Can't create new lens")
+        self.assertFalse(response, "Can't create new lens")
         
         response = z.GetSystem()
         self.assertNotEqual(response[0], numsurfs2,
@@ -1050,7 +1050,7 @@ class ZemaxTextOutput(unittest.TestCase) :
 
     def testContext(self) :
         with self.z.GetTextFileObject("Pre") as f :
-            first = f.next().strip()
+            first = next(f).strip()
         self.assertEqual(u"System/Prescription Data", first)
 
       

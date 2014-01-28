@@ -733,7 +733,7 @@ class PickupExpression:
         return x
 
     def __truediv__(self, other) :
-        return self.__div__(self, other)
+        return self.__div__(other)
 
     def __neg__(self) :
         x = self._copy()

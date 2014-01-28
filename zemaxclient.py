@@ -81,7 +81,7 @@ class Connection :
         timeout = max(self.default_timeout, timeout)
         if self.verbose :
             print("Send : " + rs)
-        response = self.conversation.request(rs, timeout)
+        response = unicode(self.conversation.request(rs, timeout), "utf-8")
         if self.verbose :
             print("Recv : " + response.rstrip())
         if response.startswith("BAD COMMAND")  :
