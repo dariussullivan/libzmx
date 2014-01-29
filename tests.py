@@ -1041,7 +1041,7 @@ class ZemaxTextOutput(unittest.TestCase) :
         text = self.z.GetTextFileString("Spt")
         nlines = len(text.splitlines())
         # simply check we received a number of lines
-        self.failUnless(nlines>=23, "Received %d lines"%nlines)
+        self.assertTrue(nlines>=23, "Received %d lines"%nlines)
 
     def testPre(self) :
         text = self.z.GetTextFileString("Pre")
