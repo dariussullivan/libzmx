@@ -593,20 +593,23 @@ class UnknownSurface(BaseSurface) :
 
     is_global_reference = property(get_global_ref_status)
         
-
-class Standard(UnknownSurface) :
-    surface_type = "STANDARD"
-
-    curvature = Property(CurvatureParameter)
-    glass = Property(Parameter, 4, str, 2, PickupFormat(2, False, False), 0)
+class FiniteSurface(UnknownSurface) :
     semidia = Property(SemiDiameterParameter)
-    conic = Property(Parameter, 6, float, 4, PickupFormat(2, True, False), 0, True)
-    coating = Property(Parameter, 7, str)
-    thermal_expansivity = Property(Parameter, 8, float, True)
 
     def set_rectangular_aperture(self, size, offset=(0,0)) :
         n = self.get_surf_num()
         self.conn.SetAperture(n, 4, size[0], size[1], offset[0], offset[1])        
+    
+
+class Standard(FiniteSurface) :
+    surface_type = "STANDARD"
+
+    curvature = Property(CurvatureParameter)
+    glass = Property(Parameter, 4, str, 2, PickupFormat(2, False, False), 0)
+
+    conic = Property(Parameter, 6, float, 4, PickupFormat(2, True, False), 0, True)
+    coating = Property(Parameter, 7, str)
+    thermal_expansivity = Property(Parameter, 8, float, True)
 
 
 class CoordinateBreak(UnknownSurface) :

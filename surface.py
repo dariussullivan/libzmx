@@ -1,4 +1,4 @@
-from libzmx import UnknownSurface, Standard, CoordinateBreak
+from libzmx import UnknownSurface, FiniteSurface, Standard, CoordinateBreak
 from libzmx import Property, Parameter, AuxParameter, ExtraParameter, PickupFormat
 from libzmx import SemiDiameterParameter
 
@@ -28,7 +28,7 @@ class GeneralisedFresnel(Standard) :
     x0y1 = Property(ExtraParameter, 4)
 
 
-class RetroReflect(UnknownSurface) :
+class RetroReflect(FiniteSurface) :
     # When glass=="mirror", exit rays coincide with incident rays
     surface_type = "RETROREF"
     
