@@ -134,15 +134,26 @@ class NonSequentialComponent(UnknownSurface) :
         self.set_obj_param(slot, 10, not ang_distr_is_rect)
         return slot
         
-    def insert_std_lens(self, slot) :
-        return self.insert_obj(slot, "NSC_SLEN")
+    def insert_std_lens(self, slot, comment=None, radii=None, semidias=None, thickness = None) :
+        slot = self.insert_obj(slot, "NSC_SLEN")
+        if comment :
+            self.set_obj_comment(slot, comment)
+        if radii is not None :
+            r1, r2 = radii
+            self.set_obj_param(slot, 1, r1)
+            self.set_obj_param(slot, 6, r2)
+        if semidias is not None :
+            r1, r2 = semidias
+            self.set_obj_param(slot, 3, r1)
+            self.set_obj_param(slot, 8, r2)
+        if thickness is not None :
+            self.set_obj_param(slot, 5, thickness)
+        return slot
 
     def insert_lenslet_array(self, slot, comment=None, thickness=None, groove_freq=None, order=None, diffract_face=None) :
         slot = self.insert_obj(slot, "NSC_LET1")
         n = self.get_surf_num()
         # set thickness
-        if comment :
-            self.set_obj_comment(slot, comment)
         if thickness :
             self.conn.SetNSCParameter(n, slot, 3, thickness)
         if groove_freq :
