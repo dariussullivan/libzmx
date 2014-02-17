@@ -1,4 +1,6 @@
-from libzmx import *
+import re
+import numpy as np
+from libzmx import UnknownSurface, Property, AuxParameter
 
 # It's hard to handle Nonsequential object references as gracefully as sequential surface references because there is no
 # Set/Get/FindLabel method for them.

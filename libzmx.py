@@ -766,17 +766,3 @@ def make_singlet(z) :
     back.thickness.focus_on_next()   # marginal ray height solve
 
     z.PushLens() # transfer model to frontend
-
-if __name__=="__main__" :
-    import sys
-
-    z = Connection()
-    print("Zemax Version : " + str(z.GetVersion()))
-    model = SurfaceSequence(z)
-    sysconfig = SystemConfig(z)
-
-    if "singlet" in sys.argv :
-        make_singlet(z)
-        z.PushLens()
-    
-
