@@ -22,7 +22,7 @@ class NonSequentialComponent(UnknownSurface) :
     def __len__(self) :
         return self.conn.GetNSCData(self.get_surf_num())
 
-    def get_object_type(self, id) :
+    def get_obj_type(self, id) :
         return self.conn.GetNSCProperty(self.get_surf_num(), id, 0)
 
     def get_obj_param(self, slot, param) :
