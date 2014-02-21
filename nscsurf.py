@@ -154,16 +154,16 @@ class NonSequentialComponent(UnknownSurface) :
 
     def insert_lenslet_array(self, slot, comment=None, thickness=None, groove_freq=None, order=None, diffract_face=None) :
         slot = self.insert_obj(slot, "NSC_LET1")
-        n = self.get_surf_num()
-        # set thickness
+        if comment :
+            self.set_obj_comment(slot, comment)
         if thickness :
-            self.conn.SetNSCParameter(n, slot, 3, thickness)
+            self.set_obj_param(slot, 3, thickness)
         if groove_freq :
-            self.conn.SetNSCParameter(n, slot, 10, groove_freq)
+            self.set_obj_param(slot, 10, groove_freq)
         if order :
-            self.conn.SetNSCParameter(n, slot, 11, order)
+            self.set_obj_param(slot, 11, order)
         if diffract_face :
-            self.conn.SetNSCParameter(n, slot, 24, diffract_face)
+            self.set_obj_param(slot, 24, diffract_face)
         return slot
 
     def insert_rect_vol(self, slot, comment=None) :
