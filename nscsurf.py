@@ -41,6 +41,9 @@ class NonSequentialComponent(UnknownSurface) :
         n = self.get_surf_num()
         self.conn.SetNSCProperty(n, slot, param, face, value)
 
+    def get_obj_comment(self, slot) :
+        return self.conn.GetNSCObjectData(self.get_surf_num(), slot, 1)
+
     def set_obj_comment(self, slot, comment) :
         self.conn.SetNSCObjectData(self.get_surf_num(), slot, 1, comment)
 

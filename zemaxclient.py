@@ -259,6 +259,10 @@ class Connection :
         offset = array(elements[9:])
         return rotation, offset
 
+    def GetNSCObjectData(self, surf, obj, code) :
+        cmd = "GetNSCObjectData,%d,%d,%d" % (surf,obj,code)
+        return self.req(cmd)
+    
     def GetNSCParameter(self, surf, obj, code) :
         cmd = "GetNSCParameter,%d,%d,%d" % (surf,obj,code)
         return self.req(cmd)
